@@ -1,0 +1,14 @@
+<script src="{{ asset('dist-hotel/js/jquery-3.6.0.min.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/jquery-ui.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/jquery.magnific-popup.min.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/owl.carousel.min.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/wow.min.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/select2.full.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/sweetalert2.min.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/jquery.waypoints.min.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/acmeticker.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/moment.min.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/daterangepicker.min.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/sticky_sidebar.js')}}"></script>
+        <script src="{{ asset('dist-hotel/js/jquery.meanmenu.js')}}"></script>
