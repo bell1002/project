@@ -28,6 +28,9 @@
             <section class="section">
                 <div class="section-header">
                     <h1>@yield('heading')</h1>
+                    <div class="ml-auto">
+                        @yield('right_top_button')
+                    </div>
                 </div>
 
                 @yield('main_content')
