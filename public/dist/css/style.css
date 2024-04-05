@@ -2822,8 +2822,8 @@ body.layout-3 .main-footer {
     .main-sidebar .sidebar-menu li.active ul.dropdown-menu {
       background-color: #f8fafb; }
     .main-sidebar .sidebar-menu li a.has-dropdown:after {
-      content: "";
-      font-family: 'Font Awesome 5 Free';
+      content: "\f105";
+      font-family: 'FontAwesome';
       font-weight: 900;
       position: absolute;
       top: 50%;

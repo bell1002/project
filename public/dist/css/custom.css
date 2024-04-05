@@ -411,3 +411,8 @@ hr.invoice-above-table {
 .was-validated .form-control:invalid{
     border-color: #dc3545!important;
 }
+
+.card.card-statistic-1 .card-icon i{
+    color: #e3e3e3;
+    font-size: 30px;
+}

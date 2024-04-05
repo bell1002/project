@@ -1,9 +1,9 @@
 @extends('admin.layout.app')
 
-@section('heading', 'View Slides')
+@section('heading', 'View Feature')
 
 @section('right_top_button')
-<a href="{{ route('admin_slide_add') }}" class="btn btn-primary"><i class="fa fa-plus"></i>Add New</a>
+<a href="{{ route('admin_feature_add') }}" class="btn btn-primary"><i class="fa fa-plus"></i>Add New</a>
 
 @endsection
 
@@ -18,21 +18,26 @@
                             <thead>
                             <tr>
                                 <th>SL</th>
-                                <th>Photo</th>
+                                <th>Icon</th>
+                                <th>Heading</th>
                                 <th>Action</th>
-                                
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($slides as $row)
+                                @foreach($features as $row)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><img src="{{ asset('uploads/'.$row->photo) }}" alt="" class="w_200"></td>
+                                <td>
+                                    <i class="{{ $row->icon }} fz_40"></i>
+                                </td>
+                                <td>
+                                    {{ $row->heading }}
+                                </td>
                                 
                                 <td class="pt_10 pb_10">
-                                    <a href="{{ route('admin_slide_edit',$row->id) }}" class="btn btn-primary" >Edit</a>
+                                    <a href="{{ route('admin_feature_edit',$row->id) }}" class="btn btn-primary" >Edit</a>
 
-                                    <a href="{{ route('admin_slide_delete',$row->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');">Delete</a>
+                                    <a href="{{ route('admin_feature_delete',$row->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
