@@ -1,9 +1,9 @@
 @extends('admin.layout.app')
 
-@section('heading', 'Edit Feature')
+@section('heading', 'Add Testimonial')
 
 @section('right_top_button')
-<a href="{{ route('admin_feature_view') }}" class="btn btn-primary"><i class="fa fa-eye"></i>View All</a>
+<a href="{{ route('admin_testimonial_view') }}" class="btn btn-primary"><i class="fa fa-eye"></i>View All</a>
 
 @endsection
 
@@ -13,31 +13,30 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('admin_feature_update', $features_data->id) }}" method="post" >
+                    <form action="{{ route('admin_testimonial_store') }}" method="post" enctype="multipart/form-data">
                         
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-4">
-                                    <label class="form-label">Existing Icon *</label>
+                                    <label class="form-label">Photo *</label>
                                     <div>
-                                        <i class="{{  $features_data->icon }} fz_40"></i>
+                                        <input type="file"  name="photo" >
                                     </div>
                                 </div>
                                 <div class="mb-4">
-                                    <label class="form-label">Icon *</label>
-                                    <input type="text" class="form-control" name="icon" value="{{ $features_data->icon }}">
+                                    <label class="form-label">Name *</label>
+                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                                 </div>
                                 <div class="mb-4">
-                                    <label class="form-label">Heading *</label>
-                                    <input type="text" class="form-control" name="heading" value="{{ $features_data->heading }}">
-                                </div>
-                                <div class="mb-4">
-                                    <label class="form-label">Text *</label>
-                                    <textarea name="text" class="form-control h_100" cols="30" rows="10">{{ $features_data->text }}</textarea>
+                                    <label class="form-label">Designation *</label>
+                                    <input name="designation" class="form-control " value="{{ old('designation') }}">
                                 </div>  
-                                
-    
+                                <div class="mb-4">
+                                    <label class="form-label">Comment*</label>
+                                    <textarea type="text" class="form-control h_100"  cols="30" rows="10" name="comment" value="">{{ old('comment') }}</textarea>
+                                </div>
+                               
                                 <div class="mb-4">
                                     <label class="form-label"></label>
                                     <button type="submit" class="btn btn-primary">Submit</button>

@@ -23,6 +23,8 @@
 
             <li class=""><a class="nav-link" href="{{ route('admin_feature_view') }}"><i class="fa fa-sliders"></i> <span>Feature</span></a></li>
 
+            <li class=""><a class="nav-link" href="{{ route('admin_testimonial_view') }}"><i class="fa fa-sliders"></i> <span>Testimonial</span></a></li>
+
         </ul>
     </aside>
 </div>
