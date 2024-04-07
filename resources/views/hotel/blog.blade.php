@@ -15,113 +15,32 @@
 <div class="blog-item">
     <div class="container">
         <div class="row">
+            @foreach($post_all as $item)
             <div class="col-md-4">
                 <div class="inner">
                     <div class="photo">
-                        <img src="uploads/1.jpg" alt="">
+                        <img src="{{ asset('uploads/'.$item->photo) }}" alt="">
                     </div>
                     <div class="text">
-                        <h2><a href="post.html">This is a sample blog post title</a></h2>
+                        <h2><a href="{{ route('post',$item->id) }}">{{ $item->heading }}</a></h2>
                         <div class="short-des">
                             <p>
-                                If you want to get some good contents from the people of your country then just contribute into the main community of your people and I am sure you will be benfitted from that. 
+                                {!! $item->short_content !!}
                             </p>
                         </div>
                         <div class="button">
-                            <a href="post.html" class="btn btn-primary">Read More</a>
+                            <a href="{{ route('post',$item->id) }}" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="inner">
-                    <div class="photo">
-                        <img src="uploads/2.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h2><a href="post.html">This is a sample blog post title</a></h2>
-                        <div class="short-des">
-                            <p>
-                                If you want to get some good contents from the people of your country then just contribute into the main community of your people and I am sure you will be benfitted from that. 
-                            </p>
-                        </div>
-                        <div class="button">
-                            <a href="post.html" class="btn btn-primary">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="inner">
-                    <div class="photo">
-                        <img src="uploads/3.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h2><a href="post.html">This is a sample blog post title</a></h2>
-                        <div class="short-des">
-                            <p>
-                                If you want to get some good contents from the people of your country then just contribute into the main community of your people and I am sure you will be benfitted from that. 
-                            </p>
-                        </div>
-                        <div class="button">
-                            <a href="post.html" class="btn btn-primary">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="inner">
-                    <div class="photo">
-                        <img src="uploads/1.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h2><a href="post.html">This is a sample blog post title</a></h2>
-                        <div class="short-des">
-                            <p>
-                                If you want to get some good contents from the people of your country then just contribute into the main community of your people and I am sure you will be benfitted from that. 
-                            </p>
-                        </div>
-                        <div class="button">
-                            <a href="post.html" class="btn btn-primary">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="inner">
-                    <div class="photo">
-                        <img src="uploads/2.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h2><a href="post.html">This is a sample blog post title</a></h2>
-                        <div class="short-des">
-                            <p>
-                                If you want to get some good contents from the people of your country then just contribute into the main community of your people and I am sure you will be benfitted from that. 
-                            </p>
-                        </div>
-                        <div class="button">
-                            <a href="post.html" class="btn btn-primary">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="inner">
-                    <div class="photo">
-                        <img src="uploads/3.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h2><a href="post.html">This is a sample blog post title</a></h2>
-                        <div class="short-des">
-                            <p>
-                                If you want to get some good contents from the people of your country then just contribute into the main community of your people and I am sure you will be benfitted from that. 
-                            </p>
-                        </div>
-                        <div class="button">
-                            <a href="post.html" class="btn btn-primary">Read More</a>
-                        </div>
-                    </div>
-                </div>
+            @endforeach
+            
+           
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ $post_all->links() }}
             </div>
         </div>
     </div>
