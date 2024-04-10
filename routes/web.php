@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminPhotoController;
+use App\Http\Controllers\Admin\AdminVideoController;
 
 
 
@@ -16,6 +17,7 @@ use App\Http\Controllers\Hotel\HomeController;
 use App\Http\Controllers\Hotel\AboutController;
 use App\Http\Controllers\Hotel\BlogController;
 use App\Http\Controllers\Hotel\PhotoController;
+use App\Http\Controllers\Hotel\VideoController;
 
 
 
@@ -31,6 +33,7 @@ Route::get('/about',[AboutController::class, 'index'])->name('about');
 Route::get('/blog',[BlogController::class, 'index'])->name('blog');
 Route::get('/post/{id}',[BlogController::class, 'single_post'])->name('post');
 Route::get('/photo-gallery',[PhotoController::class, 'index'])->name('photo_gallery');
+Route::get('/video-gallery',[VideoController::class, 'index'])->name('video_gallery');
 
 
 /* Admin */
@@ -79,3 +82,10 @@ Route::post('/admin/photo/store',[AdminPhotoController::class, 'store'])->name('
 Route::get('/admin/photo/edit/{id}',[AdminPhotoController::class, 'edit'])->name('admin_photo_edit')->middleware('admin:admin');
 Route::post('/admin/photo/update/{id}',[AdminPhotoController::class, 'update'])->name('admin_photo_update')->middleware('admin:admin');
 Route::get('/admin/photo/delete/{id}',[AdminPhotoController::class, 'delete'])->name('admin_photo_delete')->middleware('admin:admin');
+
+Route::get('/admin/video/view',[AdminVideoController::class, 'index'])->name('admin_video_view')->middleware('admin:admin');
+Route::get('/admin/video/add',[AdminVideoController::class, 'add'])->name('admin_video_add')->middleware('admin:admin');
+Route::post('/admin/video/store',[AdminVideoController::class, 'store'])->name('admin_video_store')->middleware('admin:admin');
+Route::get('/admin/video/edit/{id}',[AdminVideoController::class, 'edit'])->name('admin_video_edit')->middleware('admin:admin');
+Route::post('/admin/video/update/{id}',[AdminVideoController::class, 'update'])->name('admin_video_update')->middleware('admin:admin');
+Route::get('/admin/video/delete/{id}',[AdminVideoController::class, 'delete'])->name('admin_video_delete')->middleware('admin:admin');
