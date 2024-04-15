@@ -9,15 +9,15 @@
 
         <ul class="sidebar-menu">
 
-            <li class="active"><a class="nav-link" href="{{ route('admin_home') }}"><i class="fa fa-pie-chart"></i><span>Dashboard</span></a></li>
+            <li class="{{ Request::is('admin/home')? 'active' : ']' }}active"><a class="nav-link" href="{{ route('admin_home') }}"><i class="fa fa-pie-chart"></i><span>Dashboard</span></a></li>
 
-            {{-- <li class="nav-item dropdown active">
-                <a href="#" class="nav-link has-dropdown"><i class="fa fa-hand-o-right"></i><span>Dropdown Items</span></a>
+            <li class="nav-item dropdown active">
+                <a href="#" class="nav-link has-dropdown"><i class="fa fa-hand-o-right"></i><span>Pages</span></a>
                 <ul class="dropdown-menu">
-                    <li class="active"><a class="nav-link" href=""><i class="fa fa-angle-right"></i> Item 1</a></li>
+                    <li class="active"><a class="nav-link" href="{{ route('admin_page_about') }}"><i class="fa fa-angle-right"></i>About</a></li>
                     <li class=""><a class="nav-link" href=""><i class="fa fa-angle-right"></i> Item 2</a></li>
                 </ul>
-            </li> --}}
+            </li>
 
             <li class=""><a class="nav-link" href="{{ route('admin_slide_view') }}"><i class="fa fa-sliders"></i> <span>Slide</span></a></li>
 
@@ -30,6 +30,8 @@
             <li class=""><a class="nav-link" href="{{ route('admin_photo_view') }}"><i class="fa fa-sliders"></i> <span>Photo Gallery</span></a></li>
 
             <li class=""><a class="nav-link" href="{{ route('admin_video_view') }}"><i class="fa fa-sliders"></i> <span>Video Gallery</span></a></li>
+
+            <li class=""><a class="nav-link" href="{{ route('admin_faq_view') }}"><i class="fa fa-sliders"></i> <span>Faq</span></a></li>
 
         </ul>
     </aside>
