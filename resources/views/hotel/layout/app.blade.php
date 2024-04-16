@@ -71,9 +71,12 @@
                                 <li class="nav-item">
                                     <a href="{{ route('home') }}" class="nav-link">Home</a>
                                 </li>
+                                @if($global_page_data->about_status ?? '' ==1)
                                 <li class="nav-item">
-                                    <a href="{{ route('about') }}" class="nav-link">About</a>
+                                    <a href="{{ route('about') }}" class="nav-link">{{ $global_page_data->about_heading }}</a>
                                 </li>
+
+                                @endif
                                 <li class="nav-item">
                                     <a href="javascript:void;" class="nav-link dropdown-toggle">Room & Suite</a>
                                     <ul class="dropdown-menu">
@@ -193,9 +196,11 @@
                             <p>
                                 In order to get the latest news and other great items, please subscribe us here: 
                             </p>
-                            <form action="" method="post">
+                            <form action="{{ route('subscriber_send_email') }}" method="post" class="form_subscribe_ajax">
+                                @csrf
                                 <div class="form-group">
-                                    <input type="text" name="" class="form-control">
+                                    <input type="text" name="email" class="form-control">
+                                    <span class="text-danger error-text email_error"></span>
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-primary" value="Subscribe Now">
@@ -216,7 +221,46 @@
             <i class="fa fa-angle-up"></i>
         </div>
 		
-       @include('hotel.layout.script-footer')  
+       @include('hotel.layout.script-footer') 
+       
+       <script>
+
+            (function($)){
+                $(".form_subscribe_ajax").on('submit',function(e){
+                    e.preventDefault();
+                    $('#loader').show();
+                    var form = this;
+                    $.ajax({
+                        url:$(form).attr('action'),
+                        method:$(form).attr('method'),
+                        data:new FormData(form),
+                        processData:false,
+                        dataType:'json',
+                        contentType:false,
+                        beforeSend:function(){
+                            $(form).find('span.error-text').text('');
+
+                        },
+                        success:function(data){
+                            $('#loader').hide();
+                            if(data.code == 0){
+                                $each(data.error_message, function(prefix,val){
+                                     $(form).find('span.'+prefix+'_error').text(val[0]);
+                                });
+                            }
+                        }
+                        else if(data.code ==1){
+                            $(form)[0].reset();
+                            iziToast.success({
+                                title:'',
+                                position: 'topRight',
+                                message: data.success_message,
+                            });
+                        }
+                    });
+                });
+            }
+       </script>
 		
    </body>
 </html>

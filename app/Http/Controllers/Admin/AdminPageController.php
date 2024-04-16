@@ -18,13 +18,13 @@ class AdminPageController extends Controller
             // Assign values to $obj properties
             $obj->about_heading = $request->about_heading;
             $obj->about_content = $request->about_content;
-        
+            $obj->about_status = $request->about_status;
             // Call the update method
-            $obj->update();
+            $obj->save();
         }
         
 
-        return redirect()->back()->with('success', 'Faq is updated successfully.');
+        return redirect()->back()->with('success', 'Pages is updated successfully.');
 
     }
 }

@@ -21,6 +21,7 @@ use App\Http\Controllers\Hotel\BlogController;
 use App\Http\Controllers\Hotel\PhotoController;
 use App\Http\Controllers\Hotel\VideoController;
 use App\Http\Controllers\Hotel\FaqController;
+use App\Http\Controllers\Hotel\SubscriberController;
 
 
 
@@ -38,6 +39,8 @@ Route::get('/post/{id}',[BlogController::class, 'single_post'])->name('post');
 Route::get('/photo-gallery',[PhotoController::class, 'index'])->name('photo_gallery');
 Route::get('/video-gallery',[VideoController::class, 'index'])->name('video_gallery');
 Route::get('/faq',[FaqController::class, 'index'])->name('faq');
+Route::post('/subscriber/send-email', [SubscriberController::class, 'send_email'])->name('subscriber_send_email');
+Route::get('/subscriber/verify/{email}/{token}', [SubscriberController::class, 'verify'])->name('subscriber_verify');
 
 
 /* Admin */
