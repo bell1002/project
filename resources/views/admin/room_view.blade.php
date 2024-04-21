@@ -43,6 +43,8 @@
                                     
                                     <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal{{ $i }}">Detail</button>
 
+                                    <a href="{{ route('admin_room_gallery',$row->id) }}" class="btn btn-warning" >Photo Gallery</a>
+
                                     <a href="{{ route('admin_room_edit',$row->id) }}" class="btn btn-primary" >Edit</a>
 
                                     <a href="{{ route('admin_room_delete',$row->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');">Delete</a>

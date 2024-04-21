@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Room;
 use App\Models\Amenity;
+use App\Models\RoomPhoto;
 
 class AdminRoomController extends Controller
 {
@@ -101,6 +102,37 @@ class AdminRoomController extends Controller
         unlink(public_path('uploads/' . $room->featured_photo));
         $room->delete();
 
+        $room_photo_data = RoomPhoto::where('room_id',$id)->get();
+        foreach($room_photo_data as $item){
+            unlink(public_path('uploads/' . $item->photo));
+            $item->delete();
+        }
         return redirect('/admin/room/view')->with('success', 'Room is deleted successfully.');
+    }
+
+    public function gallery($id){
+        $room_data = Room::where('id',$id)->first();
+        $room_photos = RoomPhoto::where('room_id',$id)->get();
+
+        return view('admin.room_gallery',compact('room_data','room_photos'));
+    }
+
+    public function gallery_store(Request $request,$id){
+
+        $request->validate([
+            'photo'=> 'required|image|mimes:jpg,jpeg,png,gif'
+        ]);
+    
+        $ext = $request->file('photo')->extension();
+        $final_name = time() . '.' . $ext;
+        $request->file('photo')->move(public_path('uploads/'), $final_name);
+    
+        $obj = new RoomPhoto();
+        $obj->photo = $final_name;
+        $obj->room_id = $id;
+        
+        $obj->save();
+    
+        return redirect('/admin/room/view')->with('success', 'Room Photo is added successfully.');
     }
 }

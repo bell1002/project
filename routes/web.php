@@ -121,6 +121,9 @@ Route::get('/admin/room/edit/{id}',[AdminRoomController::class, 'edit'])->name('
 Route::post('/admin/room/update/{id}',[AdminRoomController::class, 'update'])->name('admin_room_update')->middleware('admin:admin');
 Route::get('/admin/room/delete/{id}',[AdminRoomController::class, 'delete'])->name('admin_room_delete')->middleware('admin:admin');
 
+Route::get('/admin/room/gallery/{id}',[AdminRoomController::class, 'gallery'])->name('admin_room_gallery')->middleware('admin:admin');
+Route::post('/admin/room/gallery/store/{id}',[AdminRoomController::class, 'gallery_store'])->name('admin_room_gallery_store')->middleware('admin:admin');
+
 
 Route::get('/admin/page/about',[AdminPageController::class, 'about'])->name('admin_page_about')->middleware('admin:admin');
 Route::post('/admin/page/about/update',[AdminPageController::class, 'about_update'])->name('admin_page_about_update')->middleware('admin:admin');
