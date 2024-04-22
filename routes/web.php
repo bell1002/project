@@ -24,6 +24,7 @@ use App\Http\Controllers\Hotel\PhotoController;
 use App\Http\Controllers\Hotel\VideoController;
 use App\Http\Controllers\Hotel\FaqController;
 use App\Http\Controllers\Hotel\SubscriberController;
+use App\Http\Controllers\Hotel\RoomController;
 
 
 
@@ -43,7 +44,7 @@ Route::get('/video-gallery',[VideoController::class, 'index'])->name('video_gall
 Route::get('/faq',[FaqController::class, 'index'])->name('faq');
 Route::post('/subscriber/send-email', [SubscriberController::class, 'send_email'])->name('subscriber_send_email');
 Route::get('/subscriber/verify/{email}/{token}', [SubscriberController::class, 'verify'])->name('subscriber_verify');
-
+Route::get('/room/{id}',[RoomController::class, 'single_room'])->name('room_detail');
 
 /* Admin */
 Route::get('/admin/home',[AdminHomeController::class, 'index'])->name('admin_home')->middleware('admin:admin');
