@@ -25,6 +25,7 @@ use App\Http\Controllers\Hotel\VideoController;
 use App\Http\Controllers\Hotel\FaqController;
 use App\Http\Controllers\Hotel\SubscriberController;
 use App\Http\Controllers\Hotel\RoomController;
+use App\Http\Controllers\Hotel\BookingController;
 
 
 
@@ -49,6 +50,14 @@ Route::post('/subscriber/send-email', [SubscriberController::class, 'send_email'
 Route::get('/subscriber/verify/{email}/{token}', [SubscriberController::class, 'verify'])->name('subscriber_verify');
 Route::get('/room/{id}',[RoomController::class, 'single_room'])->name('room_detail');
 Route::get('/room',[RoomController::class, 'index'])->name('room');
+Route::post('/booking/submit', [BookingController::class, 'cart_submit'])->name('cart_submit');
+Route::get('/cart', [BookingController::class, 'cart_view'])->name('cart');
+Route::get('/cart/delete/{id}', [BookingController::class, 'cart_delete'])->name('cart_delete');
+Route::get('/checkout', [BookingController::class, 'checkout'])->name('checkout');
+Route::post('/payment', [BookingController::class, 'payment'])->name('payment');
+
+Route::get('/payment/paypal/{price}', [BookingController::class, 'paypal'])->name('paypal');
+Route::post('/payment/stripe/{price}', [BookingController::class, 'stripe'])->name('stripe');
 
 /* Admin */
 Route::get('/admin/home',[AdminHomeController::class, 'index'])->name('admin_home')->middleware('admin:admin');

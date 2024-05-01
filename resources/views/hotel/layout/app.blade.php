@@ -215,10 +215,30 @@
 		
        @include('hotel.layout.script-footer') 
        
-       <script>
+       
+        @if(session()->get('error'))
+            <script>
+                iziToast.error({
+                    title: '',
+                    position: 'topRight',
+                    message: '{{ session()->get('error') }}',
+                });
+            </script>
+        @endif
+        @if(session()->get('success'))
+            <script>
+                iziToast.success({
+                    title: '',
+                    position: 'topRight',
+                    message: '{{ session()->get('success') }}',
+                });
+            </script>
+        @endif
 
-            (function($)){
-                $(".form_subscribe_ajax").on('submit',function(e){
+
+        <script>
+            (function($){
+                $(".form_subscribe_ajax").on('submit', function(e){
                     e.preventDefault();
                     $('#loader').show();
                     var form = this;
@@ -231,28 +251,32 @@
                         contentType:false,
                         beforeSend:function(){
                             $(form).find('span.error-text').text('');
-
                         },
-                        success:function(data){
+                        success:function(data)
+                        {
                             $('#loader').hide();
-                            if(data.code == 0){
-                                $each(data.error_message, function(prefix,val){
-                                     $(form).find('span.'+prefix+'_error').text(val[0]);
+                            if(data.code == 0)
+                            {
+                                $.each(data.error_message, function(prefix, val) {
+                                    $(form).find('span.'+prefix+'_error').text(val[0]);
                                 });
                             }
-                        }
-                        else if(data.code ==1){
-                            $(form)[0].reset();
-                            iziToast.success({
-                                title:'',
-                                position: 'topRight',
-                                message: data.success_message,
-                            });
+                            else if(data.code == 1)
+                            {
+                                $(form)[0].reset();
+                                iziToast.success({
+                                    title: '',
+                                    position: 'topRight',
+                                    message: data.success_message,
+                                });
+                            }
+                            
                         }
                     });
                 });
-            }
-       </script>
-		
+            })(jQuery);
+        </script>
+		<div id="loader"></div>
+
    </body>
 </html>
