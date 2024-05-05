@@ -1,4 +1,4 @@
-@extends('front.layout.app')
+@extends('hotel.layout.app')
 
 @section('main_content')
 <div class="page-top">
