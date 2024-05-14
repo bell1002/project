@@ -31,6 +31,8 @@ use App\Http\Controllers\Hotel\BookingController;
 
 use App\Http\Controllers\Customer\CustomerHomeController;
 use App\Http\Controllers\Customer\CustomerAuthController;
+use App\Http\Controllers\Customer\CustomerProfileController;
+
 
 Route::get('/', function () {
     return view('welcome');
