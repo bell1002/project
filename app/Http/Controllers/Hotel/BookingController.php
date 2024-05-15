@@ -25,48 +25,48 @@ class BookingController extends Controller
     public function predict_price($data_json)
 {
     // Chuyển đổi dữ liệu JSON thành mảng
-    $data = json_decode($data_json, true);
+     $data = json_decode($data_json, true);
 
-    // Lấy room_id từ dữ liệu
-    $room_id = $data['room_id'];
+    // // Lấy room_id từ dữ liệu
+    // $room_id = $data['room_id'];
 
-    // Thực hiện truy vấn cơ sở dữ liệu để lấy thông tin phòng từ room_id
-    $room = Room::find($room_id);
+    // // Thực hiện truy vấn cơ sở dữ liệu để lấy thông tin phòng từ room_id
+    // $room = Room::find($room_id);
 
-    if ($room) {
-        // Lấy name từ room
-        $name = $room->name;
+    // if ($room) {
+    //     // Lấy name từ room
+    //     $name = $room->name;
 
-        // Khởi tạo mảng để lưu trữ tên amenities
-        $amenities_names = [];
+    //     // Khởi tạo mảng để lưu trữ tên amenities
+    //     $amenities_names = [];
 
-        // Lấy danh sách mã amenities từ phòng
-        $amenities_ids = explode(',', $room->amenities);
+    //     // Lấy danh sách mã amenities từ phòng
+    //     $amenities_ids = explode(',', $room->amenities);
 
-        // Lặp qua từng mã amenities để lấy tên tương ứng
-        foreach ($amenities_ids as $amenity_id) {
-            // Thực hiện truy vấn cơ sở dữ liệu để lấy tên amenities từ bảng amenities
-            $amenity = Amenity::find($amenity_id);
-            if ($amenity) {
-                // Nếu tìm thấy, thêm tên amenities vào mảng
-                $amenities_names[] = $amenity->name;
-            } 
-        }
+    //     // Lặp qua từng mã amenities để lấy tên tương ứng
+    //     foreach ($amenities_ids as $amenity_id) {
+    //         // Thực hiện truy vấn cơ sở dữ liệu để lấy tên amenities từ bảng amenities
+    //         $amenity = Amenity::find($amenity_id);
+    //         if ($amenity) {
+    //             // Nếu tìm thấy, thêm tên amenities vào mảng
+    //             $amenities_names[] = $amenity->name;
+    //         } 
+    //     }
 
-        // Thêm name và amenities vào dữ liệu đầu vào
-        $data['name'] = $name;
-        $data['amenities'] = $amenities_names;
-    } else {
-        // Xử lý trường hợp không tìm thấy thông tin phòng
-        // ...
+    //     // Thêm name và amenities vào dữ liệu đầu vào
+    //     $data['name'] = $name;
+    //     $data['amenities'] = $amenities_names;
+    // } else {
+    //     // Xử lý trường hợp không tìm thấy thông tin phòng
+    //     // ...
 
-        // Nếu không tìm thấy, trả về lỗi
-        return response()->json(['error' => 'Room not found'], 404);
-    }
+    //     // Nếu không tìm thấy, trả về lỗi
+    //     return response()->json(['error' => 'Room not found'], 404);
+    // }
 
-    // Chuyển đổi lại dữ liệu thành JSON
+    //Chuyển đổi lại dữ liệu thành JSON
     $data_json = json_encode($data);
-    var_dump($data_json);
+   
     // Set up cURL để thực hiện yêu cầu POST
     $url = 'http://127.0.0.1:5000/predict';
     $ch = curl_init($url);
@@ -86,6 +86,30 @@ class BookingController extends Controller
 
     // Trả kết quả về
     return $result;
+    // Dữ liệu đầu vào
+
+    // $data_string = json_encode($data);
+    // // Gửi yêu cầu POST đến Flask API
+    // $url = 'http://127.0.0.1:5000/predict';
+    // $options = array(
+    //     'http' => array(
+    //         'header'  => "Content-type: application/json\r\n",
+    //         'method'  => 'POST',
+    //         'content' => $data_string,
+    //     ),
+    // );
+    // $context  = stream_context_create($options);
+    // $result = file_get_contents($url, false, $context);
+
+    // if ($result === FALSE) {
+    //     die('Error occurred');
+    // }
+
+    // // Hiển thị kết quả dự đoán
+    // $prediction = json_decode($result, true);
+    // echo "Prediction: " . print_r($prediction, true);
+  
+
 }
 
 
@@ -128,7 +152,7 @@ class BookingController extends Controller
         }
 
         // Debugging purpose - Display predicted room price
-        //dd( 'Predicted room price: ' . $price);
+        dd( 'Predicted room price: ' . $price);
 
         // Save information in session
         session()->push('cart_room_id', $room_id);
