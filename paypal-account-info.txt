@@ -1,0 +1,25 @@
+Developer Account:
+Email: hothikieulinh22@gmail.com
+Password: roseblackpink1997
+
+Sandbox - Personal:
+hotelsandbox@per.com
+roseblackpink1997
+
+
+
+Sandbox - Business:
+hotelsandbox@biz.com
+roseblackpink1997
+
+
+
+API Credential:
+APP Name: HOTEL_APP_NEW
+
+hotelsandbox@biz.com
+Client ID:
+AVkdBUPPKSP31YyPAyWhfO5yc3RD_ivEy95vVFXnAhzstkm4N8312YHNZH19-uC75ZxmTZscoS9_b7N_
+
+Secret: 
+EAfclTA_1S0u95j2EWUQ30l8qJ68lhERBbJOyUKeuwIFBOs59UZoxRZlJofjuRqDBqGxcqSNYha2gHPh
