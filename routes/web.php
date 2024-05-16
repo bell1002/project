@@ -32,6 +32,7 @@ use App\Http\Controllers\Hotel\BookingController;
 use App\Http\Controllers\Customer\CustomerHomeController;
 use App\Http\Controllers\Customer\CustomerAuthController;
 use App\Http\Controllers\Customer\CustomerProfileController;
+use App\Http\Controllers\Customer\CustomerOrderController;
 
 
 Route::get('/', function () {

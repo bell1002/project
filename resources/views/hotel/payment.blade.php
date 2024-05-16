@@ -83,7 +83,7 @@
                     @php
                     $cents = $total_price*100;
                     $customer_email = Auth::guard('customer')->user()->email;
-                    $stripe_publishable_key = 'pk_test_51LT28GF67T3XLjgLXbAMW8YNgvDyv6Yrg7mB6yHJhfmWgLrAL79rSBPvxcbKrsKtCesqJmxlOd259nMrNx4Qlhoa00zX7rOhOq';
+                    $stripe_publishable_key = 'pk_test_51O1o3UGCFpojC4d6NFGApLDpFQ3tekL6OmQvp9BK3db4LBtVxNEJ7P1ovgAJFwISH3dAUvY6g194EqNsCOm6xqmA007Ta4xoTw';
                     @endphp
                     <form action="{{ route('stripe',$total_price) }}" method="post">
                         @csrf
