@@ -59,6 +59,10 @@
                 </ul>
             </li>
 
+            <li class=""><a class="nav-link" href="{{ route('admin_customer') }}"><i class="fa fa-sliders"></i> <span>Customer</span></a></li>
+
+            <li class=""><a class="nav-link" href="{{ route('admin_orders') }}"><i class="fa fa-sliders"></i> <span>Ordersr</span></a></li>
+
             <li class=""><a class="nav-link" href="{{ route('admin_slide_view') }}"><i class="fa fa-sliders"></i> <span>Slide</span></a></li>
 
             <li class=""><a class="nav-link" href="{{ route('admin_feature_view') }}"><i class="fa fa-sliders"></i> <span>Feature</span></a></li>

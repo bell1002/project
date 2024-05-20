@@ -19,7 +19,8 @@ class CustomerAuthController extends Controller
     public function login_submit(Request $request){
        $request->validate([
         'email' => 'required|email',
-        'password' => 'required'
+        'password' => 'required',
+        'status' => 1
        ]);
 
        $credentail=[
