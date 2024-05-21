@@ -14,7 +14,7 @@
         $('.snote').summernote();
     });
 
-    $('.datepicker').datepicker({ format: "yyyy/mm/dd" });
+    $('.datepicker').datepicker({ format: "dd/mm/yyyy" });
     $('.timepicker').timepicker({
         icons:
         {
