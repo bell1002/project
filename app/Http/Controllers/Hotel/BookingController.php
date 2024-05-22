@@ -19,100 +19,126 @@ use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
 Use Stripe;
+use GuzzleHttp\Client;
 
 class BookingController extends Controller
 {
-    public function predict_price($data_json)
-{
-    // Chuyển đổi dữ liệu JSON thành mảng
-     $data = json_decode($data_json, true);
+//     public function predict_price($data_json)
+// {
+//     // Chuyển đổi dữ liệu JSON thành mảng
+//      $data = json_decode($data_json, true);
 
-    // // Lấy room_id từ dữ liệu
-    // $room_id = $data['room_id'];
+//     // // Lấy room_id từ dữ liệu
+//     // $room_id = $data['room_id'];
 
-    // // Thực hiện truy vấn cơ sở dữ liệu để lấy thông tin phòng từ room_id
-    // $room = Room::find($room_id);
+//     // // Thực hiện truy vấn cơ sở dữ liệu để lấy thông tin phòng từ room_id
+//     // $room = Room::find($room_id);
 
-    // if ($room) {
-    //     // Lấy name từ room
-    //     $name = $room->name;
+//     // if ($room) {
+//     //     // Lấy name từ room
+//     //     $name = $room->name;
 
-    //     // Khởi tạo mảng để lưu trữ tên amenities
-    //     $amenities_names = [];
+//     //     // Khởi tạo mảng để lưu trữ tên amenities
+//     //     $amenities_names = [];
 
-    //     // Lấy danh sách mã amenities từ phòng
-    //     $amenities_ids = explode(',', $room->amenities);
+//     //     // Lấy danh sách mã amenities từ phòng
+//     //     $amenities_ids = explode(',', $room->amenities);
 
-    //     // Lặp qua từng mã amenities để lấy tên tương ứng
-    //     foreach ($amenities_ids as $amenity_id) {
-    //         // Thực hiện truy vấn cơ sở dữ liệu để lấy tên amenities từ bảng amenities
-    //         $amenity = Amenity::find($amenity_id);
-    //         if ($amenity) {
-    //             // Nếu tìm thấy, thêm tên amenities vào mảng
-    //             $amenities_names[] = $amenity->name;
-    //         } 
-    //     }
+//     //     // Lặp qua từng mã amenities để lấy tên tương ứng
+//     //     foreach ($amenities_ids as $amenity_id) {
+//     //         // Thực hiện truy vấn cơ sở dữ liệu để lấy tên amenities từ bảng amenities
+//     //         $amenity = Amenity::find($amenity_id);
+//     //         if ($amenity) {
+//     //             // Nếu tìm thấy, thêm tên amenities vào mảng
+//     //             $amenities_names[] = $amenity->name;
+//     //         } 
+//     //     }
 
-    //     // Thêm name và amenities vào dữ liệu đầu vào
-    //     $data['name'] = $name;
-    //     $data['amenities'] = $amenities_names;
-    // } else {
-    //     // Xử lý trường hợp không tìm thấy thông tin phòng
-    //     // ...
+//     //     // Thêm name và amenities vào dữ liệu đầu vào
+//     //     $data['name'] = $name;
+//     //     $data['amenities'] = $amenities_names;
+//     // } else {
+//     //     // Xử lý trường hợp không tìm thấy thông tin phòng
+//     //     // ...
 
-    //     // Nếu không tìm thấy, trả về lỗi
-    //     return response()->json(['error' => 'Room not found'], 404);
-    // }
+//     //     // Nếu không tìm thấy, trả về lỗi
+//     //     return response()->json(['error' => 'Room not found'], 404);
+//     // }
 
-    //Chuyển đổi lại dữ liệu thành JSON
-    $data_json = json_encode($data);
+//     //Chuyển đổi lại dữ liệu thành JSON
+//     $data_json = json_encode($data);
    
-    // Set up cURL để thực hiện yêu cầu POST
-    $url = 'http://127.0.0.1:5000/predict';
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'Content-Type: application/json',
-        'Content-Length: ' . strlen($data_json)
-    ));
+//     // Set up cURL để thực hiện yêu cầu POST
+//     $url = 'http://127.0.0.1:5000/predict';
+//     $ch = curl_init($url);
+//     curl_setopt($ch, CURLOPT_POST, true);
+//     curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
+//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+//         'Content-Type: application/json',
+//         'Content-Length: ' . strlen($data_json)
+//     ));
 
-    // Thực hiện yêu cầu POST và nhận kết quả
-    $result = curl_exec($ch);
+//     // Thực hiện yêu cầu POST và nhận kết quả
+//     $result = curl_exec($ch);
 
-    // Đóng phiên cURL
-    curl_close($ch);
+//     // Đóng phiên cURL
+//     curl_close($ch);
 
-    // Trả kết quả về
-    return $result;
-    // Dữ liệu đầu vào
+//     // Trả kết quả về
+//     return $result;
+//     // Dữ liệu đầu vào
 
-    // $data_string = json_encode($data);
-    // // Gửi yêu cầu POST đến Flask API
-    // $url = 'http://127.0.0.1:5000/predict';
-    // $options = array(
-    //     'http' => array(
-    //         'header'  => "Content-type: application/json\r\n",
-    //         'method'  => 'POST',
-    //         'content' => $data_string,
-    //     ),
-    // );
-    // $context  = stream_context_create($options);
-    // $result = file_get_contents($url, false, $context);
+//     // $data_string = json_encode($data);
+//     // // Gửi yêu cầu POST đến Flask API
+//     // $url = 'http://127.0.0.1:5000/predict';
+//     // $options = array(
+//     //     'http' => array(
+//     //         'header'  => "Content-type: application/json\r\n",
+//     //         'method'  => 'POST',
+//     //         'content' => $data_string,
+//     //     ),
+//     // );
+//     // $context  = stream_context_create($options);
+//     // $result = file_get_contents($url, false, $context);
 
-    // if ($result === FALSE) {
-    //     die('Error occurred');
-    // }
+//     // if ($result === FALSE) {
+//     //     die('Error occurred');
+//     // }
 
-    // // Hiển thị kết quả dự đoán
-    // $prediction = json_decode($result, true);
-    // echo "Prediction: " . print_r($prediction, true);
+//     // // Hiển thị kết quả dự đoán
+//     // $prediction = json_decode($result, true);
+//     // echo "Prediction: " . print_r($prediction, true);
   
 
-}
+// }
+    public function predict_price($data_json){
+        // Create a GuzzleHTTP client
+        $client = new Client();
 
+        try {
+            // Send a POST request to the Flask API
+            $response = $client->post('http://127.0.0.1:5000/predict', [
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                ],
+                'body' => $data_json
+            ]);
 
+            // Get the response body
+            $body = $response->getBody();
+            $result = json_decode($body, true);
+
+            // Return the predicted price
+            return $result['prediction'] ?? null;
+        } catch (\Exception $e) {
+            // Log the error
+            \Log::error('Failed to predict room price: ' . $e->getMessage());
+
+            // Return null if an error occurs
+            return null;
+        }
+    }
 
     public function cart_submit(Request $request)
     {
@@ -133,11 +159,13 @@ class BookingController extends Controller
 
         // Prepare data for prediction
         $data = [
-            'room_id' => $room_id,
-            'checkin_date' => $checkin_date,
-            'checkout_date' => $checkout_date,
-            'adults' => $adults,
-            'children' => $children
+            'features' => [
+                'room_id' => (int)$room_id,
+                'checkin_date' => (int)strtotime($checkin_date),
+                'checkout_date' => (int)strtotime($checkout_date),
+                'adults' => (int)$adults,
+                'children' => (int)$children
+            ]
         ];
 
         // Convert data to JSON
@@ -152,7 +180,7 @@ class BookingController extends Controller
         }
 
         // Debugging purpose - Display predicted room price
-       // dd( 'Predicted room price: ' . $price);
+        //dd( 'Predicted room price: ' , $price);
 
         // Save information in session
         session()->push('cart_room_id', $room_id);

@@ -20,12 +20,13 @@ class CustomerAuthController extends Controller
        $request->validate([
         'email' => 'required|email',
         'password' => 'required',
-        'status' => 1
+        
        ]);
 
        $credentail=[
         'email'=> $request->email,
-        'password'=> $request->password
+        'password'=> $request->password,
+        'status' => 1,
 
        ];
 

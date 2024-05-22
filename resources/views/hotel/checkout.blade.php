@@ -173,17 +173,33 @@
                                                 $t1 = strtotime($d1_new);
                                                 $t2 = strtotime($d2_new);
                                                 $diff = ($t2-$t1)/60/60/24;
-                                                echo '$'.$room_data->price*$diff;
+                                                // Lấy giá phòng từ session và chuyển đổi thành một số thực
+                                                $room_price = session()->get('cart_price')[$i];
+
+                                                // Kiểm tra nếu giá phòng không phải là số thực
+                                                if (!is_float($room_price)) {
+                                                    // Nếu không phải số thực, thử lấy phần tử đầu tiên trong mảng
+                                                    $room_price = is_array($room_price) ? $room_price[0] : $room_price;
+                                                }
+
+                                                // Kiểm tra lại nếu giá phòng là số thực sau khi xử lý
+                                                if (is_float($room_price)) {
+                                                    // Tính toán tổng giá trị
+                                                    $room_price ;
+                                                    echo '$' . number_format($room_price, 0);
+                                                } else {
+                                                    echo 'Invalid room price';
+                                                } // Format giá phòng để hiển thị đúng dạng tiền tệ
                                             @endphp
                                         </td>
                                     </tr>
                                     @php
-                                    $total_price = $total_price+($room_data->price*$diff);
+                                    $total_price += (float) strtok($room_price, '.');
                                 }
                                 @endphp                                
                                 <tr>
                                     <td><b>Total:</b></td>
-                                    <td class="p_price"><b>${{ $total_price }}</b></td>
+                                    <td class="p_price"><b>${{ number_format($total_price, 0) }}</b></td>
                                 </tr>
                             </tbody>
                         </table>
