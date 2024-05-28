@@ -39,6 +39,8 @@
                     </div>
                     <div class="col-md-6 right-side">
                         <ul class="right">
+                            <li class="menu"><a href="{{ route('chatai') }}">CHAT AI</a></li>
+
                             @if($global_page_data->cart_status == 1)
                             <li class="menu"><a href="{{ route('cart') }}">{{ $global_page_data->cart_heading }} @if(session()->has('cart_room_id'))<sup>{{ count(session()->get('cart_room_id')) }}</sup>@endif</a></li>
                             @endif

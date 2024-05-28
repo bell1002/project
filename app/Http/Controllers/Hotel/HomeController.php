@@ -22,4 +22,6 @@ class HomeController extends Controller
 
         return view('hotel.home', compact('slide_all','feature_all','testimonial_all','post_all','room_all'));
     }
+    
+
 }
