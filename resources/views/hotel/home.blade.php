@@ -164,7 +164,7 @@
                         </div>
                         <div class="text">
                             <h4>{{ $item->name }}</h4>
-                            <p>{!! $item->designation !!}/p>
+                            <p>{!! $item->designation !!}</p>
                         </div>
                         <div class="description">
                             <p>

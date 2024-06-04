@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>{{ $gobal_page_data->room_heading }}</h2>
+                <h2>{{ $global_page_data->room_heading }}</h2>
             </div>
         </div>
     </div>

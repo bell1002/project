@@ -9,7 +9,7 @@ use App\Models\Video;
 class VideoController extends Controller
 {
     public function index(){
-        $video_all = Video::paginate(1);
+        $video_all = Video::paginate(12);
         return view('hotel.video_gallery',compact('video_all'));
     }
 }

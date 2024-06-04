@@ -61,9 +61,8 @@
                                 <td><img src="{{ asset('uploads/'.$row->photo) }}" alt="" class="w_200"></td>
                                 
                                 <td class="pt_10 pb_10">
-                                    <a href="{{ route('admin_slide_edit',$row->id) }}" class="btn btn-primary" >Edit</a>
 
-                                    <a href="{{ route('admin_slide_delete',$row->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');">Delete</a>
+                                    <a href="{{ route('admin_room_gallery_delete',$row->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');">Delete</a>
                                 </td>
                             </tr>
                             @endforeach

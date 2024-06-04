@@ -20,11 +20,11 @@
                 </ul>
             </li>
 
-            <li class="{{ Request::is('admin/datewise-rooms') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_datewise_rooms') }}"><i class="fa fa-angle-right"></i> Datewise Rooms</a></li>
+            <li class="{{ Request::is('admin/datewise-rooms') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_datewise_rooms') }}"><i class="fa fa-check"></i> Datewise Rooms</a></li>
 
 
             <li class="nav-item dropdown {{ Request::is('admin/page/about')||Request::is('admin/page/terms')||Request::is('admin/page/privacy')||Request::is('admin/page/contact')||Request::is('admin/page/photo-gallery')||Request::is('admin/page/video-gallery')||Request::is('admin/page/faq')||Request::is('admin/page/blog')||Request::is('admin/page/room')||Request::is('admin/page/cart')||Request::is('admin/page/checkout')||Request::is('admin/page/payment')||Request::is('admin/page/signup')||Request::is('admin/page/signin')||Request::is('admin/page/forget-password')||Request::is('admin/page/reset-password') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown"><i class="fa fa-arrows"></i><span>Pages</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fa fa-file-text"></i><span>Pages</span></a>
                 <ul class="dropdown-menu">
                      <li class="{{ Request::is('admin/page/about') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_page_about') }}"><i class="fa fa-angle-right"></i> About</a></li>
 
@@ -61,23 +61,23 @@
                 </ul>
             </li>
 
-            <li class=""><a class="nav-link" href="{{ route('admin_customer') }}"><i class="fa fa-sliders"></i> <span>Customer</span></a></li>
+            <li class=""><a class="nav-link" href="{{ route('admin_customer') }}"><i class="fa fa-users"></i> <span>Customer</span></a></li>
 
-            <li class=""><a class="nav-link" href="{{ route('admin_orders') }}"><i class="fa fa-sliders"></i> <span>Ordersr</span></a></li>
+            <li class=""><a class="nav-link" href="{{ route('admin_orders') }}"><i class="fa fa-shopping-cart"></i> <span>Orders</span></a></li>
 
-            <li class=""><a class="nav-link" href="{{ route('admin_slide_view') }}"><i class="fa fa-sliders"></i> <span>Slide</span></a></li>
+            <li class=""><a class="nav-link" href="{{ route('admin_slide_view') }}"><i class="fa fa-window-restore"></i> <span>Slide</span></a></li>
 
             <li class=""><a class="nav-link" href="{{ route('admin_feature_view') }}"><i class="fa fa-sliders"></i> <span>Feature</span></a></li>
 
-            <li class=""><a class="nav-link" href="{{ route('admin_testimonial_view') }}"><i class="fa fa-sliders"></i> <span>Testimonial</span></a></li>
+            <li class=""><a class="nav-link" href="{{ route('admin_testimonial_view') }}"><i class="fa fa-commenting-o"></i> <span>Testimonial</span></a></li>
 
-            <li class=""><a class="nav-link" href="{{ route('admin_post_view') }}"><i class="fa fa-sliders"></i> <span>Post</span></a></li>
+            <li class=""><a class="nav-link" href="{{ route('admin_post_view') }}"><i class="fa fa-pencil-square-o"></i> <span>Post</span></a></li>
 
-            <li class=""><a class="nav-link" href="{{ route('admin_photo_view') }}"><i class="fa fa-sliders"></i> <span>Photo Gallery</span></a></li>
+            <li class=""><a class="nav-link" href="{{ route('admin_photo_view') }}"><i class="fa fa-picture-o"></i> <span>Photo Gallery</span></a></li>
 
-            <li class=""><a class="nav-link" href="{{ route('admin_video_view') }}"><i class="fa fa-sliders"></i> <span>Video Gallery</span></a></li>
+            <li class=""><a class="nav-link" href="{{ route('admin_video_view') }}"><i class="fa fa-video-camera"></i> <span>Video Gallery</span></a></li>
 
-            <li class=""><a class="nav-link" href="{{ route('admin_faq_view') }}"><i class="fa fa-sliders"></i> <span>Faq</span></a></li>
+            <li class=""><a class="nav-link" href="{{ route('admin_faq_view') }}"><i class="fa fa-question-circle-o"></i> <span>Faq</span></a></li>
 
         </ul>
     </aside>

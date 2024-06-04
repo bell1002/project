@@ -9,7 +9,7 @@ use App\Models\Photo;
 class PhotoController extends Controller
 {
     public function index(){
-        $photo_all = Photo::paginate(2);
+        $photo_all = Photo::paginate(12);
         return view('hotel.photo_gallery',compact('photo_all'));
     }
 }

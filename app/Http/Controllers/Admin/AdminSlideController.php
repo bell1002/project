@@ -76,4 +76,7 @@ class AdminSlideController extends Controller
         return redirect('/admin/slide/view')->with('success', 'Slide is deleted successfully.');
 
     }
+
+    
+    
 }

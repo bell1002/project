@@ -135,4 +135,13 @@ class AdminRoomController extends Controller
     
         return redirect('/admin/room/view')->with('success', 'Room Photo is added successfully.');
     }
+
+    public function gallery_delete($id){
+        $single_data = RoomPhoto::where('id',$id)->first();
+        unlink(public_path('uploads/'.$single_data->photo));
+        $single_data->delete();
+
+        return redirect('/admin/room/view')->with('success', 'Room photo is deleted successfully.');
+
+    }
 }

@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <title>Hotel Website</title>        
 		
-        <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.png') }}">
+        <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.png')  }}">
 
         <!-- All CSS -->
         @include('hotel.layout.styles')
@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-md-6 right-side">
                         <ul class="right">
-                            <li class="menu"><a href="{{ route('chatai') }}">CHAT AI</a></li>
+                           {{-- <li class="menu"><a href="{{ route('chatai') }}">CHAT AI</a></li> --}}
 
                             @if($global_page_data->cart_status == 1)
                             <li class="menu"><a href="{{ route('cart') }}">{{ $global_page_data->cart_heading }} @if(session()->has('cart_room_id'))<sup>{{ count(session()->get('cart_room_id')) }}</sup>@endif</a></li>
@@ -76,8 +76,8 @@
 
             <!-- Menu For Mobile Device -->
             <div class="mobile-nav">
-                <a href="index.html" class="logo">
-                    <img src="uploads/logo.png" alt="">
+                <a href="{{ route('home') }}" class="logo">
+                    <img src="uploads/logo.png" alt="" >
                 </a>
             </div>
         
@@ -85,7 +85,7 @@
             <div class="main-nav">
                 <div class="container">
                     <nav class="navbar navbar-expand-md navbar-light">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="{{ route('home') }}">
                             <img src="uploads/logo.png" alt="">
                         </a>
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
