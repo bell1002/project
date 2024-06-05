@@ -13,11 +13,6 @@ model = xgb.Booster()
 model.load_model('room_price_xgboost_model.json')
 
 # Tạo ánh xạ từ tên phòng thành giá trị số
-room_name_mapping = {
-    'Double Room': 4,
-    'Single Room': 5,
-    # Thêm các phòng khác nếu có
-}
 
 @app.route('/predict', methods=['POST'])
 def predict():
