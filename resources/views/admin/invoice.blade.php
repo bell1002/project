@@ -48,7 +48,7 @@
                                 <th class="text-center">Number of Children</th>
                                 <th class="text-right">Subtotal</th>
                             </tr>
-                            @php $total = 0; @endphp
+                            @php $total = 0; $i=0 @endphp
                             @foreach($order_detail as $item)
                             @php
                             $room_data = \App\Models\Room::where('id',$item->room_id)->first();
@@ -69,11 +69,33 @@
                                     $t1 = strtotime($d1_new);
                                     $t2 = strtotime($d2_new);
                                     $diff = ($t2-$t1)/60/60/24;
-                                    $sub = $room_data->price*$diff;
+                                    // Lấy giá phòng từ session và chuyển đổi thành một số thực
+                                    $room_price = session()->get('cart_price')[$i];
+
+                                    // Kiểm tra nếu giá phòng không phải là số thực
+                                    if (!is_float($room_price)) {
+                                    // Nếu không phải số thực, thử lấy phần tử đầu tiên trong mảng
+                                    $room_price = is_array($room_price) ? $room_price[0] : $room_price;
+                                    }
+
+                                    // Kiểm tra lại nếu giá phòng là số thực sau khi xử lý
+                                    if (is_float($room_price)) {
+                                    // Tính toán tổng giá trị
+                                    $room_price ;
+                                    //echo '$' . number_format($room_price, 0);
+                                    } else {
+                                    echo 'Invalid room price';
+                                    } // Format giá phòng để hiển thị đúng dạng tiền tệ
+                                    $sub =  number_format($room_price, 4);
+                                   
                                     @endphp
                                     ${{ $sub }}
                                 </td>
                             </tr>
+                            @php
+                            $i++;
+                            @endphp
+                            @endphp
                             @php
                             $total += $sub;
                             @endphp
@@ -84,7 +106,7 @@
                         <div class="col-lg-12 text-right">
                             <div class="invoice-detail-item">
                                 <div class="invoice-detail-name">Total</div>
-                                <div class="invoice-detail-value invoice-detail-value-lg">${{ $total }}</div>
+                                <div class="invoice-detail-value invoice-detail-value-lg">${{ number_format($total, 4) }}</div>
                             </div>
                         </div>
                     </div>

@@ -114,8 +114,8 @@
                                         // Kiểm tra lại nếu giá phòng là số thực sau khi xử lý
                                         if (is_float($room_price)) {
                                             // Tính toán tổng giá trị
-                                            $room_price ;
-                                            echo '$' . number_format($room_price, 0);
+                                           // $room_price ;
+                                            echo '$' . number_format($room_price, 5);
                                         } else {
                                             echo 'Invalid room price';
                                         } // Format giá phòng để hiển thị đúng dạng tiền tệ
@@ -129,7 +129,7 @@
                             @endphp                            
                             <tr>
                                 <td colspan="8" class="tar">Total:</td>
-                                <td>${{ number_format($total_price, 0) }}</td>
+                                <td>${{ number_format($total_price, 5) }}</td>
                                 
                             </tr>
                         </tbody>
