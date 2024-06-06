@@ -115,7 +115,6 @@ class BookingController extends Controller
     public function predict_price($data_json){
         // Create a GuzzleHTTP client
         $client = new Client();
-
         try {
             // Send a POST request to the Flask API
             $response = $client->post('http://127.0.0.1:5000/predict', [
@@ -124,17 +123,14 @@ class BookingController extends Controller
                 ],
                 'body' => $data_json
             ]);
-
             // Get the response body
             $body = $response->getBody();
             $result = json_decode($body, true);
-
             // Return the predicted price
             return $result['prediction'] ?? null;
         } catch (\Exception $e) {
             // Log the error
             \Log::error('Failed to predict room price: ' . $e->getMessage());
-
             // Return null if an error occurs
             return null;
         }
