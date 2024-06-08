@@ -1,7 +1,7 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('customer_home') }}">Admin Panel</a>
+            <a href="{{ route('customer_home') }}">Customer Panel</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('customer_home') }}"></a>

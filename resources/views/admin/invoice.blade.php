@@ -48,7 +48,7 @@
                                 <th class="text-center">Number of Children</th>
                                 <th class="text-right">Subtotal</th>
                             </tr>
-                            @php $total = 0; $i=0 @endphp
+                            @php $total = 0; $i=0; @endphp
                             @foreach($order_detail as $item)
                             @php
                             $room_data = \App\Models\Room::where('id',$item->room_id)->first();
@@ -86,18 +86,17 @@
                                     } else {
                                     echo 'Invalid room price';
                                     } // Format giá phòng để hiển thị đúng dạng tiền tệ
-                                    $sub =  number_format($room_price, 4);
+                                    $sub =  number_format($room_price, 2);
                                    
                                     @endphp
                                     ${{ $sub }}
                                 </td>
                             </tr>
-                            @php
-                            $i++;
-                            @endphp
-                            @endphp
+                           
+                            
                             @php
                             $total += $sub;
+                            $i++;
                             @endphp
                             @endforeach
                         </table>
@@ -106,7 +105,7 @@
                         <div class="col-lg-12 text-right">
                             <div class="invoice-detail-item">
                                 <div class="invoice-detail-name">Total</div>
-                                <div class="invoice-detail-value invoice-detail-value-lg">${{ number_format($total, 4) }}</div>
+                                <div class="invoice-detail-value invoice-detail-value-lg">${{ number_format($total, 2) }}</div>
                             </div>
                         </div>
                     </div>

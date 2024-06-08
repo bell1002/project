@@ -138,22 +138,42 @@ class BookingController extends Controller
 
     public function cart_submit(Request $request)
     {
+       
+      
+    // Lấy ngày hôm nay
+    $selected_date = date('d/m/Y');
+    
+    // Lấy phòng từ request
+    $room_id = $request->input('room_id');
+   
+    // Lấy số lượng phòng có sẵn cho phòng đã chọn
+    $available_rooms = Room::find($room_id)->total_rooms - BookedRoom::where('room_id', $room_id)->where('booking_date', $selected_date)->count();
+    
+    // Kiểm tra số lượng phòng có sẵn
+    if ($available_rooms <= 0) {
+        return redirect()->back()->with('error', 'The selected room is not available.');
+    }
+    
+
+
+        // Validate dữ liệu từ form
         $request->validate([
             'room_id' => 'required',
             'checkin_checkout' => 'required',
             'adult' => 'required'
         ]);
-
+    
+        // Tách ngày checkin và checkout từ chuỗi nhập vào
         $dates = explode(' - ', $request->checkin_checkout);
         $checkin_date = $dates[0];
         $checkout_date = $dates[1];
-
-        // Get data from the form
+    
+        // Lấy dữ liệu từ form
         $room_id = $request->room_id;
         $adults = $request->adult;
         $children = $request->children;
-
-        // Prepare data for prediction
+    
+        // Chuẩn bị dữ liệu cho dự đoán giá phòng
         $data = [
             'features' => [
                 'room_id' => (int)$room_id,
@@ -163,33 +183,30 @@ class BookingController extends Controller
                 'children' => (int)$children
             ]
         ];
-
-        // Convert data to JSON
+    
+        // Chuyển dữ liệu thành JSON
         $data_json = json_encode($data);
-
-        // Call the predict_price function to predict the room price
+    
+        // Gọi hàm predict_price để dự đoán giá phòng
         $price = $this->predict_price($data_json);
-
-        // Check if room price prediction is successful
+    
+        // Kiểm tra xem dự đoán giá phòng có thành công không
         if ($price === null) {
             return redirect()->back()->with('error', 'Failed to predict room price.');
         }
-
-        // Debugging purpose - Display predicted room price
-        //dd( 'Predicted room price: ' , $price);
-
-        // Save information in session
+    
+        // Lưu thông tin vào session
         session()->push('cart_room_id', $room_id);
         session()->push('cart_checkin_date', $checkin_date);
         session()->push('cart_checkout_date', $checkout_date);
         session()->push('cart_adult', $adults);
         session()->push('cart_children', $children);
         session()->push('cart_price', $price);
-
-        // Redirect back with success message
+    
+        // Chuyển hướng trở lại trang trước với thông báo thành công
         return redirect()->back()->with('success', 'Room is added to the cart successfully.');
     }
-
+    
     public function cart_view()
     {
         return view('hotel.cart');
@@ -197,66 +214,39 @@ class BookingController extends Controller
 
     public function cart_delete($id)
     {
-        $arr_cart_room_id = array();
-        $i=0;
-        foreach(session()->get('cart_room_id') as $value) {
-            $arr_cart_room_id[$i] = $value;
-            $i++;
-        }
-
-        $arr_cart_checkin_date = array();
-        $i=0;
-        foreach(session()->get('cart_checkin_date') as $value) {
-            $arr_cart_checkin_date[$i] = $value;
-            $i++;
-        }
-
-        $arr_cart_checkout_date = array();
-        $i=0;
-        foreach(session()->get('cart_checkout_date') as $value) {
-            $arr_cart_checkout_date[$i] = $value;
-            $i++;
-        }
-
-        $arr_cart_adult = array();
-        $i=0;
-        foreach(session()->get('cart_adult') as $value) {
-            $arr_cart_adult[$i] = $value;
-            $i++;
-        }
-
-        $arr_cart_children = array();
-        $i=0;
-        foreach(session()->get('cart_children') as $value) {
-            $arr_cart_children[$i] = $value;
-            $i++;
-        }
-
+        // Initialize arrays to hold the cart data
+        $arr_cart_room_id = session()->get('cart_room_id', []);
+        $arr_cart_checkin_date = session()->get('cart_checkin_date', []);
+        $arr_cart_checkout_date = session()->get('cart_checkout_date', []);
+        $arr_cart_adult = session()->get('cart_adult', []);
+        $arr_cart_children = session()->get('cart_children', []);
+        $arr_cart_price = session()->get('cart_price', []);
+    
+        // Clear the current session data
         session()->forget('cart_room_id');
         session()->forget('cart_checkin_date');
         session()->forget('cart_checkout_date');
         session()->forget('cart_adult');
         session()->forget('cart_children');
-
-        for($i=0;$i<count($arr_cart_room_id);$i++)
-        {
-            if($arr_cart_room_id[$i] == $id) 
-            {
-                continue;    
-            }
-            else
-            {
-                session()->push('cart_room_id',$arr_cart_room_id[$i]);
-                session()->push('cart_checkin_date',$arr_cart_checkin_date[$i]);
-                session()->push('cart_checkout_date',$arr_cart_checkout_date[$i]);
-                session()->push('cart_adult',$arr_cart_adult[$i]);
-                session()->push('cart_children',$arr_cart_children[$i]);
+        session()->forget('cart_price');
+    
+        // Iterate through the cart items and re-add them to the session if they don't match the ID to delete
+        for ($i = 0; $i < count($arr_cart_room_id); $i++) {
+            if ($arr_cart_room_id[$i] == $id) {
+                continue;
+            } else {
+                session()->push('cart_room_id', $arr_cart_room_id[$i]);
+                session()->push('cart_checkin_date', $arr_cart_checkin_date[$i]);
+                session()->push('cart_checkout_date', $arr_cart_checkout_date[$i]);
+                session()->push('cart_adult', $arr_cart_adult[$i]);
+                session()->push('cart_children', $arr_cart_children[$i]);
+                session()->push('cart_price', $arr_cart_price[$i]);
             }
         }
-
+    
         return redirect()->back()->with('success', 'Cart item is deleted.');
-
     }
+    
 
     public function checkout()
     {
@@ -351,7 +341,7 @@ class BookingController extends Controller
             $obj->order_no = $order_no;
             $obj->transaction_id = $result->id;
             $obj->payment_method = 'PayPal';
-            $obj->paid_amount = $paid_amount;
+            $obj->paid_amount = number_format($final_price, 2);
             $obj->booking_date = date('d/m/Y');
             $obj->status = 'Completed';
             $obj->save();
@@ -401,7 +391,7 @@ class BookingController extends Controller
                 $t1 = strtotime($d1_new);
                 $t2 = strtotime($d2_new);
                 $diff = ($t2-$t1)/60/60/24;
-                $sub = $r_info->price*$diff;
+                $sub = $r_info->price;
 
                 $obj = new OrderDetail();
                 $obj->order_id = $ai_id;
@@ -481,7 +471,7 @@ class BookingController extends Controller
     public function stripe(Request $request,$final_price)
     {
         $stripe_secret_key = 'sk_test_51O1o3UGCFpojC4d6ncT5FxsTcJjhanPvillpMqD2zVmdovnHt1utbuG8JdQbkyEJw2CtGYOpSdDqndeOEP2vkCSH00X36WPGsY';
-        $cents = $final_price*100;
+        $cents = (int)($final_price*100);
         Stripe\Stripe::setApiKey($stripe_secret_key);
         $response = Stripe\Charge::create ([
             "amount" => $cents,
@@ -505,7 +495,7 @@ class BookingController extends Controller
         $obj->transaction_id = $transaction_id;
         $obj->payment_method = 'Stripe';
         $obj->card_last_digit = $last_4;
-        $obj->paid_amount = $final_price;
+        $obj->paid_amount = number_format($final_price, 2);
         $obj->booking_date = date('d/m/Y');
         $obj->status = 'Completed';
         $obj->save();
@@ -555,7 +545,7 @@ class BookingController extends Controller
             $t1 = strtotime($d1_new);
             $t2 = strtotime($d2_new);
             $diff = ($t2-$t1)/60/60/24;
-            $sub = $r_info->price*$diff;
+            $sub = $r_info->price;
 
             $obj = new OrderDetail();
             $obj->order_id = $ai_id;
