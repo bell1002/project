@@ -15,6 +15,9 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="example1">
+                            <div class="mb-3">
+                                <a href="{{ route('admin_rooms_export') }}" class="btn btn-success">Export Excel</a>
+                            </div>
                             <thead>
                             <tr>
                                 <th>SL</th>

@@ -10,7 +10,19 @@ class OrdersExport implements FromCollection, WithHeadings
 {
     public function collection()
     {
-        return Order::all();
+        $orders = Order::select('order_no', 'payment_method', 'booking_date','paid_amount','status')->get();
+        $orders = $orders->map(function ($order, $index) {
+            return [
+                'SL' => $index + 1,
+                'Order No' => $order->order_no,
+                'Payment Method' => $order->payment_method,
+                'Booking Date' => $order->booking_date,
+                'Paid Amount' => $order->paid_amount,
+                'Status' => $order->status,
+            ];
+        });
+    
+        return $orders;
     }
 
     public function headings(): array

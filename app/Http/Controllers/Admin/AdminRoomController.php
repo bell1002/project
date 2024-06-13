@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Room;
 use App\Models\Amenity;
 use App\Models\RoomPhoto;
+use App\Exports\RoomsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminRoomController extends Controller
 {
@@ -144,4 +146,10 @@ class AdminRoomController extends Controller
         return redirect('/admin/room/view')->with('success', 'Room photo is deleted successfully.');
 
     }
+
+    public function export()
+    {
+        return Excel::download(new RoomsExport, 'Rooms.xlsx');
+    }
+
 }

@@ -115,6 +115,8 @@ Route::group(['middleware' =>['admin:admin']], function(){
     Route::get('/admin/customers', [AdminCustomerController::class, 'index'])->name('admin_customer');
     Route::get('/admin/customer/change-status/{id}', [AdminCustomerController::class, 'change_status'])->name('admin_customer_change_status');
     Route::get('/admin/customers/{status}', [AdminCustomerController::class, 'customer_status'])->name('admin_customer_status');
+    Route::get('/admin/customers/export', [AdminCustomerController::class, 'export'])->name('admin_customers_export');
+
 
     Route::get('/admin/order/view', [AdminOrderController::class, 'index'])->name('admin_orders');
     Route::get('/admin/order/invoice/{id}', [AdminOrderController::class, 'invoice'])->name('admin_invoice');
@@ -245,4 +247,7 @@ Route::group(['middleware' =>['admin:admin']], function(){
     Route::get('/admin/room/gallery/{id}', [AdminRoomController::class, 'gallery'])->name('admin_room_gallery');
     Route::post('/admin/room/gallery/store/{id}', [AdminRoomController::class, 'gallery_store'])->name('admin_room_gallery_store');
     Route::get('/admin/room/gallery/delete/{id}', [AdminRoomController::class, 'gallery_delete'])->name('admin_room_gallery_delete');
+
+    Route::get('/admin/room/export', [AdminRoomController::class, 'export'])->name('admin_rooms_export');
+
 });
