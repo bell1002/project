@@ -46,7 +46,6 @@ Route::get('/', function () {
 /*Hotel */
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
-Route::get('/chatai',[HomeController::class, 'chatai'])->name('chatai');
 Route::get('/about',[AboutController::class, 'index'])->name('about');
 Route::get('/blog',[BlogController::class, 'index'])->name('blog');
 Route::get('/post/{id}',[BlogController::class, 'single_post'])->name('post');
@@ -115,10 +114,12 @@ Route::group(['middleware' =>['admin:admin']], function(){
 
     Route::get('/admin/customers', [AdminCustomerController::class, 'index'])->name('admin_customer');
     Route::get('/admin/customer/change-status/{id}', [AdminCustomerController::class, 'change_status'])->name('admin_customer_change_status');
+    Route::get('/admin/customers/{status}', [AdminCustomerController::class, 'customer_status'])->name('admin_customer_status');
 
     Route::get('/admin/order/view', [AdminOrderController::class, 'index'])->name('admin_orders');
     Route::get('/admin/order/invoice/{id}', [AdminOrderController::class, 'invoice'])->name('admin_invoice');
     Route::get('/admin/order/delete/{id}', [AdminOrderController::class, 'delete'])->name('admin_order_delete');
+    Route::get('/admin/order/export', [AdminOrderController::class, 'export'])->name('admin_orders_export');
 
     Route::get('/admin/slide/view', [AdminSlideController::class, 'index'])->name('admin_slide_view');
     Route::get('/admin/slide/add', [AdminSlideController::class, 'add'])->name('admin_slide_add');

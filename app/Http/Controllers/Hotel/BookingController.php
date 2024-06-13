@@ -381,6 +381,8 @@ class BookingController extends Controller
                 $i++;
             }
 
+            $arr_cart_price = session()->get('cart_price');
+
             for($i=0;$i<count($arr_cart_room_id);$i++)
             {
                 $r_info = Room::where('id',$arr_cart_room_id[$i])->first();
@@ -390,9 +392,21 @@ class BookingController extends Controller
                 $d2_new = $d2[2].'-'.$d2[1].'-'.$d2[0];
                 $t1 = strtotime($d1_new);
                 $t2 = strtotime($d2_new);
-                $diff = ($t2-$t1)/60/60/24;
-                $sub = $r_info->price;
+                // $diff = ($t2-$t1)/60/60/24;
+                // $sub = $r_info->price;
+                $room_price = $arr_cart_price[$i];
 
+                // Kiểm tra nếu giá phòng không phải là số thực
+                if (!is_float($room_price)) {
+                    // Nếu không phải số thực, thử lấy phần tử đầu tiên trong mảng
+                    $room_price = is_array($room_price) ? $room_price[0] : $room_price;
+                }
+
+                // Kiểm tra lại nếu giá phòng là số thực sau khi xử lý
+                if (is_float($room_price)) {
+                    // Tính toán tổng giá trị
+                    $sub = $room_price;
+                }
                 $obj = new OrderDetail();
                 $obj->order_id = $ai_id;
                 $obj->room_id = $arr_cart_room_id[$i];
@@ -401,7 +415,7 @@ class BookingController extends Controller
                 $obj->checkout_date = $arr_cart_checkout_date[$i];
                 $obj->adult = $arr_cart_adult[$i];
                 $obj->children = $arr_cart_children[$i];
-                $obj->subtotal = $sub;
+                $obj->subtotal = number_format($sub, 2);
                 $obj->save();
 
                 while(1) {
@@ -535,6 +549,8 @@ class BookingController extends Controller
             $i++;
         }
 
+        $arr_cart_price = session()->get('cart_price');
+
         for($i=0;$i<count($arr_cart_room_id);$i++)
         {
             $r_info = Room::where('id',$arr_cart_room_id[$i])->first();
@@ -544,8 +560,21 @@ class BookingController extends Controller
             $d2_new = $d2[2].'-'.$d2[1].'-'.$d2[0];
             $t1 = strtotime($d1_new);
             $t2 = strtotime($d2_new);
-            $diff = ($t2-$t1)/60/60/24;
-            $sub = $r_info->price;
+            // $diff = ($t2-$t1)/60/60/24;
+            // $sub = $arr_cart_price[$i];
+            $room_price = $arr_cart_price[$i];
+
+                     // Kiểm tra nếu giá phòng không phải là số thực
+            if (!is_float($room_price)) {
+                // Nếu không phải số thực, thử lấy phần tử đầu tiên trong mảng
+                $room_price = is_array($room_price) ? $room_price[0] : $room_price;
+            }
+
+            // Kiểm tra lại nếu giá phòng là số thực sau khi xử lý
+            if (is_float($room_price)) {
+                // Tính toán tổng giá trị
+                $sub = $room_price;
+            }
 
             $obj = new OrderDetail();
             $obj->order_id = $ai_id;
@@ -555,7 +584,7 @@ class BookingController extends Controller
             $obj->checkout_date = $arr_cart_checkout_date[$i];
             $obj->adult = $arr_cart_adult[$i];
             $obj->children = $arr_cart_children[$i];
-            $obj->subtotal = $sub;
+            $obj->subtotal = number_format($sub,2);
             $obj->save();
 
             while(1) {

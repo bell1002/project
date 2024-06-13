@@ -48,56 +48,35 @@
                                 <th class="text-center">Number of Children</th>
                                 <th class="text-right">Subtotal</th>
                             </tr>
-                            @php $total = 0; $i=0; @endphp
-                            @foreach($order_detail as $item)
                             @php
-                            $room_data = \App\Models\Room::where('id',$item->room_id)->first();
+                                $total = 0;
+                                $i = 0;
                             @endphp
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $room_data->name }}</td>
-                                <td class="text-center">{{ $item->checkin_date }}</td>
-                                <td class="text-center">{{ $item->checkout_date }}</td>
-                                <td class="text-center">{{ $item->adult }}</td>
-                                <td class="text-center">{{ $item->children }}</td>
-                                <td class="text-right">
-                                    @php
+                            @foreach($order_detail as $item)
+                                @php
+                                    $room_data = \App\Models\Room::where('id', $item->room_id)->first();
                                     $d1 = explode('/',$item->checkin_date);
                                     $d2 = explode('/',$item->checkout_date);
                                     $d1_new = $d1[2].'-'.$d1[1].'-'.$d1[0];
                                     $d2_new = $d2[2].'-'.$d2[1].'-'.$d2[0];
                                     $t1 = strtotime($d1_new);
                                     $t2 = strtotime($d2_new);
-                                    $diff = ($t2-$t1)/60/60/24;
-                                    // Lấy giá phòng từ session và chuyển đổi thành một số thực
-                                    $room_price = session()->get('cart_price')[$i];
-
-                                    // Kiểm tra nếu giá phòng không phải là số thực
-                                    if (!is_float($room_price)) {
-                                    // Nếu không phải số thực, thử lấy phần tử đầu tiên trong mảng
-                                    $room_price = is_array($room_price) ? $room_price[0] : $room_price;
-                                    }
-
-                                    // Kiểm tra lại nếu giá phòng là số thực sau khi xử lý
-                                    if (is_float($room_price)) {
-                                    // Tính toán tổng giá trị
-                                    $room_price ;
-                                    //echo '$' . number_format($room_price, 0);
-                                    } else {
-                                    echo 'Invalid room price';
-                                    } // Format giá phòng để hiển thị đúng dạng tiền tệ
-                                    $sub =  number_format($room_price, 2);
-                                   
-                                    @endphp
-                                    ${{ $sub }}
-                                </td>
-                            </tr>
-                           
-                            
-                            @php
-                            $total += $sub;
-                            $i++;
-                            @endphp
+                                    $sub = (float) $item->subtotal; // Ensure subtotal is float
+                                    $formatted_sub = number_format($sub, 2);
+                                    $total += $sub;
+                                @endphp
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $room_data->name }}</td>
+                                    <td class="text-center">{{ $item->checkin_date }}</td>
+                                    <td class="text-center">{{ $item->checkout_date }}</td>
+                                    <td class="text-center">{{ $item->adult }}</td>
+                                    <td class="text-center">{{ $item->children }}</td>
+                                    <td class="text-right">${{ $formatted_sub }}</td>
+                                </tr>
+                                @php
+                                    $i++;
+                                @endphp
                             @endforeach
                         </table>
                     </div>

@@ -10,6 +10,9 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="example1">
+                            <div class="mb-3">
+                                <a href="{{ route('admin_orders_export') }}" class="btn btn-success">Export Excel</a>
+                            </div>
                             <thead>
                                 <tr>
                                     <th>SL</th>
@@ -17,6 +20,7 @@
                                     <th>Payment Method</th>
                                     <th>Booking Date</th>
                                     <th>Paid Amount</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -28,6 +32,7 @@
                                     <td>{{ $row->payment_method }}</td>
                                     <td>{{ $row->booking_date }}</td>
                                     <td>{{ $row->paid_amount }}</td>
+                                    <td>{{ $row->status }}</td>
                                     <td class="pt_10 pb_10">
                                         <a href="{{ route('admin_invoice',$row->id) }}" class="btn btn-primary">Detail</a>
                                         <a href="{{ route('admin_order_delete',$row->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');">Delete</a>

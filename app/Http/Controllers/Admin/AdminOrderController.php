@@ -8,6 +8,8 @@ use Auth;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Exports\OrdersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminOrderController extends Controller
 {
@@ -28,5 +30,10 @@ class AdminOrderController extends Controller
         $obj = OrderDetail::where('order_id', $id)->delete();
 
         return redirect()->back()->with('success', 'Order is deleteed successfully');
+    }
+
+    public function export()
+    {
+        return Excel::download(new OrdersExport, 'orders.xlsx');
     }
 }

@@ -21,6 +21,7 @@
                                 <th>Photo</th>
                                 <th>Name</th>
                                 <th>Designation</th>
+                                <th>Comment</th>
                                 <th>Action</th>
                                 
                             </tr>

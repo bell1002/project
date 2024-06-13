@@ -23,4 +23,18 @@ class AdminCustomerController extends Controller
         $customer_data->update();
         return redirect()->back()->with('success', 'Status is changed successfully');
     }
+
+    public function customer_status($status = null){
+
+        if ($status == 'active') {
+            $customers = Customer::where('status', 1)->get();
+        } else {
+            $customers = Customer::where('status', 0)->get();
+        }
+
+        $total_active_customers = Customer::where('status', 1)->count();
+        $total_pending_customers = Customer::where('status', 0)->count();
+
+        return view('admin.customer', compact('customers', 'total_active_customers','total_pending_customers'));
+    }
 }

@@ -6,6 +6,7 @@
 <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
         <div class="card card-statistic-1">
+            <a class="nav-link" href="{{ route('admin_orders') }}">
             <div class="card-icon bg-primary">
                 <i class="fa fa-user"></i>
             </div>
@@ -18,34 +19,39 @@
                 </div>
             </div>
         </div>
+    </a>
     </div>
-    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+    {{-- <div class="col-lg-4 col-md-6 col-sm-6 col-12">
         <div class="card card-statistic-1">
             <div class="card-icon bg-danger">
                 <i class="fa fa-user"></i>
             </div>
             <div class="card-wrap">
+                
                 <div class="card-header">
                     <h4>Total Pending Orders</h4>
                 </div>
                 <div class="card-body">
                     {{ $total_pending_orders }}
                 </div>
+           
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
         <div class="card card-statistic-1">
             <div class="card-icon bg-warning">
                 <i class="fa fa-bullhorn"></i>
             </div>
             <div class="card-wrap">
+                <a class="nav-link" href="{{ route('admin_customer_status', 'active') }}">
                 <div class="card-header">
                     <h4>Active Customers</h4>
                 </div>
                 <div class="card-body">
                     {{ $total_active_customers }}
                 </div>
+            </a>
             </div>
         </div>
     </div>
@@ -55,12 +61,14 @@
                 <i class="fa fa-bullhorn"></i>
             </div>
             <div class="card-wrap">
+                <a class="nav-link" href="{{ route('admin_customer_status', 'pending') }}">
                 <div class="card-header">
                     <h4>Pending Customers</h4>
                 </div>
                 <div class="card-body">
                     {{ $total_pending_customers }}
                 </div>
+            </a>
             </div>
         </div>
     </div>
@@ -70,12 +78,14 @@
                 <i class="fa fa-bullhorn"></i>
             </div>
             <div class="card-wrap">
+                <a class="nav-link" href="{{ route('admin_room_view') }}">
                 <div class="card-header">
                     <h4>Total Rooms</h4>
                 </div>
                 <div class="card-body">
                     {{ $total_rooms }}
                 </div>
+            </a>
             </div>
         </div>
     </div>
