@@ -115,7 +115,7 @@ Route::group(['middleware' =>['admin:admin']], function(){
     Route::get('/admin/customers', [AdminCustomerController::class, 'index'])->name('admin_customer');
     Route::get('/admin/customer/change-status/{id}', [AdminCustomerController::class, 'change_status'])->name('admin_customer_change_status');
     Route::get('/admin/customers/{status}', [AdminCustomerController::class, 'customer_status'])->name('admin_customer_status');
-    Route::get('/admin/customers/export', [AdminCustomerController::class, 'export'])->name('admin_customers_export');
+    Route::get('/admin/customers/export/{status}', [AdminCustomerController::class, 'export'])->name('admin_customers_export');
 
 
     Route::get('/admin/order/view', [AdminOrderController::class, 'index'])->name('admin_orders');

@@ -61,7 +61,7 @@
                 </ul>
             </li>
 
-            <li class=""><a class="nav-link" href="{{ route('admin_customer') }}"><i class="fa fa-users"></i> <span>Customer</span></a></li>
+            <li class=""><a class="nav-link" href="{{ route('admin_customer_status', ['status' => 'all']) }}"><i class="fa fa-users"></i> <span>Customer</span></a></li>
 
             <li class=""><a class="nav-link" href="{{ route('admin_orders') }}"><i class="fa fa-shopping-cart"></i> <span>Orders</span></a></li>
 

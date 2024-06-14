@@ -9,13 +9,14 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
+                        
                         <table class="table table-bordered" id="example1">
-                            <div class="mb-3">
-                               
-                                        <div class="mb-3">
-                                            <a href="{{ route('admin_customers_export') }}" class="btn btn-success">Export Customers</a>
-                                        </div>
-                                    
+                            <div class="mb-3 d-flex justify-content-end">
+                                @if(isset($status) && in_array($status, ['active', 'pending', 'all']))
+                                    <a href="{{ route('admin_customers_export', ['status' => $status]) }}" class="btn btn-success ml-3">Export {{ ucfirst($status) }} Customers</a>
+                                @elseif(!isset($status))
+                                    <a href="{{ route('admin_customers_export') }}" class="btn btn-success ml-3">Export All Customers</a>
+                                @endif
                             </div>
                             
                             <thead>
@@ -33,21 +34,20 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        @if($row->photo!='')
+                                        @if($row->photo != '')
                                             <img src="{{ asset('uploads/'.$row->photo) }}" alt="" class="w_100">
                                         @else
                                             <img src="{{ asset('uploads/default.png') }}" alt="" class="w_100">
                                         @endif
-                                        
                                     </td>
                                     <td>{{ $row->name }}</td>
                                     <td>{{ $row->email }}</td>
                                     <td>{{ $row->phone }}</td>
                                     <td class="pt_10 pb_10">
                                         @if($row->status == 1)
-                                            <a href="{{ route('admin_customer_change_status',$row->id) }}" class="btn btn-success">Active</a>
+                                            <a href="{{ route('admin_customer_change_status', $row->id) }}" class="btn btn-success">Active</a>
                                         @else
-                                            <a href="{{ route('admin_customer_change_status',$row->id) }}" class="btn btn-danger">Pending</a>
+                                            <a href="{{ route('admin_customer_change_status', $row->id) }}" class="btn btn-danger">Pending</a>
                                         @endif
                                     </td>
                                 </tr>
